@@ -40,13 +40,31 @@ endmodule
 ```
 ### SR Flip-Flop Test bench 
 ```verilog
+module sr_ff_tb;
+reg clk, S, R;
+wire Q;
+sr_ff uut (.clk(clk),.S(S),.R(R),.Q(Q));
+initial begin
+clk = 0;
+forever #10 clk = ~clk;
+end
+initial begin
+S = 0; R = 0;
+#100 S = 1; R = 0;
+#100 S = 0; R = 0;
+#100 S = 0; R = 1;
+#100 S = 1; R = 1;
+#100 S = 0; R = 0;
+end
+endmodule
+
 
 
 
 ```
 #### SIMULATION OUTPUT
+<img width="1891" height="1186" alt="image" src="https://github.com/user-attachments/assets/c9039906-37aa-4fd6-b9cb-97ff704b77af" />
 
-------- paste the output here -------
 ---
 
 ### JK Flip-Flop (Blocking)
@@ -63,13 +81,34 @@ endmodule
 ```
 ### JK Flip-Flop Test bench 
 ```verilog
+module tb_jk_ff;
+reg clk;
+reg J, K;
+wire Q;
+jk_ff uut (.clk(clk),.J(J),.K(K),.Q(Q));
+initial begin
+clk=0;
+forever #20 clk=~clk;
+end
+initial begin
+J = 0; K = 0;
+#100 J=0; K=0;
+#100 J=0; K=1;
+#100 J=1; K=0;
+#100 J=1; K=1;
+#100 J=0; K=1;
+#100 J=1; K=0;
+#100 J=1; K=1;
+end
+endmodule
+
 
 
 
 ```
 #### SIMULATION OUTPUT
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/ae5af63c-25e7-4a7c-a66f-e75d7f608f3d" />
 
-------- paste the output here -------
 ---
 ### D Flip-Flop (Blocking)
 ```verilog
@@ -87,12 +126,28 @@ endmodule
 ```verilog
 
 
+module dff_tb;
+reg clk_t, rst_t, d_t;
+wire q_t;
+dff dut (.clk(clk_t),.rst(rst_t),.d(d_t),.q(q_t) );
+initial begin
+clk_t = 1'b0;
+rst_t = 1'b1;
+d_t = 1'b0;
+#100 rst_t = 1'b0;
+#100 d_t = 1'b1;
+#100 d_t = 1'b0;
+#100 d_t = 1'b1;
+end
+always #10 clk_t = ~clk_t;
+endmodule
+
 
 ```
 
 #### SIMULATION OUTPUT
+<img width="1919" height="1197" alt="image" src="https://github.com/user-attachments/assets/1bb0d2c9-d748-42d7-a42b-25f18ed75c22" />
 
-------- paste the output here -------
 ---
 ### T Flip-Flop (Blocking)
 ```verilog
@@ -109,13 +164,32 @@ endmodule
 ### T Flip-Flop Test bench 
 ```verilog
 
+module t_ff_tb;
+reg clk, rst, T;
+wire Tout;
+t_ff uut (.clk(clk),.rst(rst),.T(T),.Tout(Tout));
+initial begin
+clk = 0;
+forever #10 clk = ~clk;
+end
+initial begin
+rst = 1; T = 0;
+#20 rst = 0;
+#20 T = 1;
+#20 T = 0;
+#20 T = 1;
+#20 T = 1;
+#20 T = 0;
+end
+endmodule
+
 
 
 ```
 
 #### SIMULATION OUTPUT
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/4a4173dc-74df-4c8d-bfb9-681e648546e0" />
 
-------- paste the output here -------
 
 ---
 

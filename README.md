@@ -148,11 +148,17 @@ endmodule
 ---
 ### T Flip-Flop (Blocking)
 ```verilog
-module d_ff (
-    input wire d,clk,
+module t_ff (
+    input wire T, clk,
     output reg Q
 );
     always @(posedge clk) begin
+        if (T)
+            Q <= ~Q;
+        else
+            Q <= Q;
+    end
+endmodule
 
 
 
